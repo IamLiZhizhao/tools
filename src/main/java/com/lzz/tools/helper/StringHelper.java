@@ -1,25 +1,28 @@
 package com.lzz.tools.helper;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
+import org.springframework.util.StringUtils;
+import net.sourceforge.pinyin4j.PinyinHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * String类相关的帮助类
+ * String帮助类
  *
  * @author lizhizhao
- * @since 2020-05-17 14:25
+ * @since 2020-05-27 11:30
  */
 public class StringHelper {
 
     /**
-     * 根据前后缀获取中间的字符串
+     * 根据前后缀截取中间字符串
      * 存在则返回中间字符串，否则返回""
      * @param value
      * @param prefix
      * @param suffix
      * @return
      */
-    private String substringByFix(String value, String prefix, String suffix) {
+    public static String substringByFix(String value, String prefix, String suffix) {
         int beginIndex = value.indexOf(prefix);
         int endIndex = value.indexOf(suffix);
         if (beginIndex < 0 || endIndex > value.length() || endIndex - beginIndex < 0) {
@@ -28,24 +31,48 @@ public class StringHelper {
         return value.substring(beginIndex + prefix.length(), endIndex);
     }
 
-
     /**
-     * 使用md5的算法进行加密
+     * 截取字符串前后缀中字符集合 - 包含前后缀
+     * 
+     * @param value 待截取字符串 例: ${userName};今天的日期为${date};捡到了${amount}元钱.
+     * @param prefix 前缀 例: ${
+     * @param suffix 后缀 例: }
+     * @return 截取的字符串集合 例: [userName,date,amount]
      */
-    public static String md5(String str) {
-        try {
-            // 生成一个MD5加密计算摘要
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            // 计算md5函数
-            md.update(str.getBytes());
-            // digest()最后确定返回md5 hash值，返回值为8为字符串。因为md5 hash值是16位的hex值，实际上就是8位的字符
-            // BigInteger函数则将8位的字符串转换成16位hex值，用字符串来表示；得到字符串形式的hash值
-            String md5=new BigInteger(1, md.digest()).toString(16);
-            //BigInteger会把0省略掉，需补全至32位
-            return md5.toLowerCase();
-        } catch (Exception e) {
-            throw new RuntimeException("MD5加密错误:"+e.getMessage(),e);
+    public static List<String> splitByFix(String value, String prefix, String suffix) {
+        List<String> result = new ArrayList<>();
+        int indexStart = value.indexOf(prefix);
+        int indexEnd = 0;
+        while (indexStart >= 0) {
+            indexEnd = value.indexOf(suffix);
+            String substr = value.substring(indexStart + prefix.length(), indexEnd);
+            result.add(substr);
+            value = value.substring(indexEnd + suffix.length());
+            indexStart = value.indexOf(prefix);
         }
+        return result;
     }
 
+    /**
+     * 得到中文首字母,例如"单据"得到DJ返回
+     *
+     * @param str 中文字符串
+     * @return
+     */
+    public static String getPinYinHeadChar(String str) {
+        StringBuilder sb = new StringBuilder();
+        if (StringUtils.isEmpty(str)) {
+            return "";
+        }
+        for (int i = 0; i < str.length(); i++) {
+            char word = str.charAt(i);
+            String[] pinyinArray = PinyinHelper.toHanyuPinyinStringArray(word);
+            if (pinyinArray != null) {
+                sb.append(pinyinArray[0].charAt(0));
+            } else {
+                sb.append(word);
+            }
+        }
+        return sb.toString().toUpperCase();
+    }
 }
