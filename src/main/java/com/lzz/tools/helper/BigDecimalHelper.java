@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 public class BigDecimalHelper {
 
     //默认除法运算精度
-    private static final int DEF_DIV_SCALE = 10;
+    private static final int DEF_DIV_SCALE = 6;
 
     /**
      * 提供精确的加法运算
@@ -166,8 +166,8 @@ public class BigDecimalHelper {
      * @return 两个参数的商
      */
 
-    public static double div(double v1, double v2) {
-        return div(v1, v2, DEF_DIV_SCALE);
+    public static double divide(double v1, double v2) {
+        return divide(v1, v2, DEF_DIV_SCALE);
     }
 
     /**
@@ -179,7 +179,7 @@ public class BigDecimalHelper {
      * @param scale 表示表示需要精确到小数点以后几位。
      * @return 两个参数的商
      */
-    public static double div(double v1, double v2, int scale) {
+    public static double divide(double v1, double v2, int scale) {
         if (scale < 0) {
             throw new IllegalArgumentException("The scale must be a positive integer or zero");
         }
@@ -197,7 +197,7 @@ public class BigDecimalHelper {
      * @param scale 表示需要精确到小数点以后几位
      * @return 两个参数的商
      */
-    public static String div(String v1, String v2, int scale) {
+    public static String divide(String v1, String v2, int scale) {
         if (scale < 0) {
             throw new IllegalArgumentException("The scale must be a positive integer or zero");
         }
