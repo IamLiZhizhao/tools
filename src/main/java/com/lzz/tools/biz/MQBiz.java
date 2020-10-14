@@ -25,16 +25,6 @@ public class MQBiz {
     private DelayQueue<DelayedItem> delayQueue = new DelayQueue<>();
 
 
-
-
-
-
-
-
-
-
-
-
     // region  延迟队列发送kafka
 
     /**

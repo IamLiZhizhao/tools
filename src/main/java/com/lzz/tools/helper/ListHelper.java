@@ -11,11 +11,11 @@ public final class ListHelper {
     }
 
     public static boolean isNullOrEmpty(Collection collection) {
-        return null == collection ? true : collection.isEmpty();
+        return null == collection || collection.isEmpty();
     }
 
     public static boolean isObjectNullOrEmpty(Collection collection) {
-        return null != collection && !collection.isEmpty() ? collection.stream().allMatch(StringUtils::isEmpty) : true;
+        return null == collection || collection.isEmpty() || collection.stream().allMatch(StringUtils::isEmpty);
     }
 
     public static <T> T first(List<T> list) {

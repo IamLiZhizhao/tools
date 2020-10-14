@@ -14,6 +14,10 @@ import java.util.List;
  */
 public class StringHelper {
 
+    public static boolean isNullOrEmpty(String source) {
+        return source == null || source.trim().isEmpty();
+    }
+
     /**
      * 根据前后缀截取中间字符串
      * 存在则返回中间字符串，否则返回""
@@ -75,4 +79,22 @@ public class StringHelper {
         }
         return sb.toString().toUpperCase();
     }
+
+    /**
+     * 拼接字符串
+     * @param strArray
+     * @return
+     */
+    private static String appendStr(String... strArray) {
+        StringBuilder builder = new StringBuilder();
+        if (strArray != null && strArray.length > 0) {
+            for (String str : strArray) {
+                if (!StringUtils.isEmpty(str)) {
+                    builder.append(str);
+                }
+            }
+        }
+        return builder.toString();
+    }
+
 }
