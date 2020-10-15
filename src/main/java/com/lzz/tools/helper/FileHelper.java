@@ -1,12 +1,17 @@
 package com.lzz.tools.helper;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.channels.FileChannel;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 /**
- * 文件流帮助类
+ * 文件帮助类
  *
  * @author lizhizhao
  * @since 2020-10-14 17:10
@@ -19,7 +24,7 @@ public class FileHelper {
      * @param pathStr
      * @return
      */
-    public byte[] urlToBytes(String pathStr) {
+    public static byte[] urlToBytes(String pathStr) {
         ByteArrayOutputStream bos = null;
         InputStream inputStream = null;
         try {
@@ -53,4 +58,31 @@ public class FileHelper {
         return null;
     }
 
+
+    /**
+     * 文件内容复制
+     * 从srcPath到destPath
+     * srcPath;"src.txt"    destPath;"dest.txt"
+     * @throws IOException
+     */
+    private static void copy(String srcPath, String destPath) throws IOException {
+        try (FileInputStream fileInputStream = new FileInputStream(srcPath);
+             FileOutputStream fileOutputStream = new FileOutputStream(destPath)) {
+            byte[] buffer = new byte[100];
+            int len = 0;
+            while ((len = fileInputStream.read(buffer)) != -1) {
+                fileOutputStream.write(buffer, 0, len);
+            }
+        }
+    }
+
+    /**
+     * 文件复制
+     * @throws IOException
+     */
+    private static void fileChannelCopy(String srcPath, String destPath) throws IOException {
+        FileChannel in = FileChannel.open(Paths.get(srcPath), StandardOpenOption.READ);
+        FileChannel out = FileChannel.open(Paths.get(destPath), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+        in.transferTo(0, in.size(), out);
+    }
 }
