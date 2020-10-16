@@ -65,7 +65,7 @@ public class FileHelper {
      * srcPath;"src.txt"    destPath;"dest.txt"
      * @throws IOException
      */
-    private static void copy(String srcPath, String destPath) throws IOException {
+    public static void copy(String srcPath, String destPath) throws IOException {
         try (FileInputStream fileInputStream = new FileInputStream(srcPath);
              FileOutputStream fileOutputStream = new FileOutputStream(destPath)) {
             byte[] buffer = new byte[100];
@@ -80,7 +80,7 @@ public class FileHelper {
      * 文件复制
      * @throws IOException
      */
-    private static void fileChannelCopy(String srcPath, String destPath) throws IOException {
+    public static void fileChannelCopy(String srcPath, String destPath) throws IOException {
         FileChannel in = FileChannel.open(Paths.get(srcPath), StandardOpenOption.READ);
         FileChannel out = FileChannel.open(Paths.get(destPath), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
         in.transferTo(0, in.size(), out);
