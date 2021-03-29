@@ -11,6 +11,7 @@ class ToolsApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.println("test");
 		try {
 			FileHelper.copy("E:/测试复制.txt","E:/copy.txt");
 			FileHelper.fileChannelCopy("E:/测试复制.txt","E:/copy2.txt");
