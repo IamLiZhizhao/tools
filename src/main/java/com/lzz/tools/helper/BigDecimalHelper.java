@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 public class BigDecimalHelper {
 
     //默认除法运算精度
-    private static final int DEF_DIV_SCALE = 6;
+    private static final int DEF_DIV_SCALE = 4;
 
     /**
      * 提供精确的加法运算

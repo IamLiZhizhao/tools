@@ -8,7 +8,7 @@
 ### 使用技巧
 ##### 1.去除前后空格trim
 
-```css
+```js
 /*使用trim修饰符*/
 <input v-model.trim = "massage" >
 ```
@@ -24,7 +24,7 @@
 ```
 
 
-##### el-table type="expand" 子项无数据时不显示展开按钮
+##### 3.el-table type="expand" 子项无数据时不显示展开按钮
 ###### html部分：
     <el-table
       :row-class-name="getRowClass"
