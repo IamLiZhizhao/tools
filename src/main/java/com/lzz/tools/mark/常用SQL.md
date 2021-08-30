@@ -25,3 +25,10 @@ ALTER TABLE `cho_bill_carrier_cost` ADD INDEX `idx_composition` ( `vendor_order_
 ```sql
 update frt_freight_line_contract set freight_line_contract_id=id;
 ```
+
+
+## QUERY
+###### 查询某个元素在列表形式的String是否存在？addressCodes：1,2,5,7
+```sql
+SELECT * FROM address WHERE FIND_IN_SET('5', addressCodes);
+```
