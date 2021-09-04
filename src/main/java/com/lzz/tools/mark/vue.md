@@ -41,3 +41,18 @@
       display: none;
     }
 
+#### 下拉框实现输入过滤
+```js
+<el-select v-model="carrierCode" clearable filterable placeholder="请选择">
+              <el-option
+                v-for="item in carrierCodeOptions"
+                :key="item.carrierCode"
+                :label="item.carrierName + '(' + item.carrierCode + ')'"
+                :value="item.carrierCode">
+                <span style="float: left">{{ item.carrierName }}</span>
+                <span style="float: right">&nbsp;&nbsp;{{ item.carrierCode }}</span>
+              </el-option>
+            </el-select>
+```
+filterable：开启过滤功能，可以对key进行查询
+
