@@ -56,3 +56,8 @@
 ```
 filterable：开启过滤功能，可以对key进行查询
 
+
+#### 该方法是把javascript对象转换成json字符串
+    JSON.stringify()
+> 理解JSON.stringify()高级用法: https://www.cnblogs.com/tugenhua0707/p/9800453.html
+

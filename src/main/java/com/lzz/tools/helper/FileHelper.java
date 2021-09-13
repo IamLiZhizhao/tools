@@ -1,14 +1,12 @@
 package com.lzz.tools.helper;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 文件帮助类
@@ -85,4 +83,67 @@ public class FileHelper {
         FileChannel out = FileChannel.open(Paths.get(destPath), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
         in.transferTo(0, in.size(), out);
     }
+
+    /**
+     * 读取文件内容
+     * @param fileName 文件名（含路径）
+     * @return
+     */
+    public static String readFileContent(String fileName) {
+        File file = new File(fileName);
+        BufferedReader reader = null;
+        StringBuffer sbf = new StringBuffer();
+        try {
+            reader = new BufferedReader(new FileReader(file));
+            String tempStr;
+            while ((tempStr = reader.readLine()) != null) {
+                sbf.append(tempStr);
+            }
+            reader.close();
+            return sbf.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
+        return sbf.toString();
+    }
+
+    /**
+     * 读取文件内容
+     * @param inputStream 输入流
+     * @return
+     */
+    public static String readFileContentByStream(InputStream inputStream) {
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+        BufferedReader reader = null;
+        StringBuffer sbf = new StringBuffer();
+        try {
+            reader = new BufferedReader(inputStreamReader);
+            String tempStr;
+            while ((tempStr = reader.readLine()) != null) {
+                sbf.append(tempStr);
+            }
+            reader.close();
+            return sbf.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
+        return sbf.toString();
+    }
+
 }
