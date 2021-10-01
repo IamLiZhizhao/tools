@@ -32,3 +32,10 @@ update frt_freight_line_contract set freight_line_contract_id=id;
 ```sql
 SELECT * FROM address WHERE FIND_IN_SET('5', addressCodes);
 ```
+
+
+######## 要使用查询缓存的语句，可以用 SQL_CACHE 显式指定
+```sql
+select SQL_CACHE * from T where ID=10;
+```
+
