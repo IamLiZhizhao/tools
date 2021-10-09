@@ -42,8 +42,8 @@
     }
 
 #### 下拉框实现输入过滤
-```js
-<el-select v-model="carrierCode" clearable filterable placeholder="请选择">
+```vue
+    <el-select v-model="carrierCode" clearable filterable placeholder="请选择">
               <el-option
                 v-for="item in carrierCodeOptions"
                 :key="item.carrierCode"
@@ -61,3 +61,12 @@ filterable：开启过滤功能，可以对key进行查询
     JSON.stringify()
 > 理解JSON.stringify()高级用法: https://www.cnblogs.com/tugenhua0707/p/9800453.html
 
+
+#### 清除同行元素
+<div style="clear:both"></div>
+clear:both该属性的值指出了不允许有浮动对象的边。
+通俗的讲：这段代码的做用是：清除同行元素，不允许其它元素与之在一行内。
+
+
+#### 增加一个不做必填校验的*符号
+在form-item里加上 class = "is-required"
