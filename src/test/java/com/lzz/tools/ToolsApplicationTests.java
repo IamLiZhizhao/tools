@@ -10,17 +10,6 @@ import java.io.IOException;
 class ToolsApplicationTests {
 
 	@Test
-	void contextLoads() {
-		System.out.println("test");
-		try {
-			FileHelper.copy("E:/测试复制.txt","E:/copy.txt");
-			FileHelper.fileChannelCopy("E:/测试复制.txt","E:/copy2.txt");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Test
 	void test() {
 		//isCreatable
 		System.out.println(NumberUtils.isCreatable("2.34f"));//true
